@@ -1,0 +1,21 @@
+<div class="Navbar">
+    <div class="Navbar-Link Navbar-Link-toggle">
+        <i (click)="clickMenu()" class="fas fa-bars"></i>
+    </div>
+    <nav class="Navbar-Items">
+        <div class="Navbar-Link">
+            <a class="brand" routerLink="/backend" routerLinkActive="active-link">Alazetu</a>
+        </div>
+        <div class="Navbar-Link">
+            <a class="brand" routerLink="/gallery" routerLinkActive="active-link">Gallery</a>
+        </div>
+        <div class="Navbar-Link">
+            <a class="brand" routerLink="/articles" routerLinkActive="active-link">Articles</a>
+        </div>
+    </nav>
+    <nav class="Navbar-Items Navbar-Items--right">
+        <div class="Navbar-Link">
+            <a class="brand" (click)="logout()">Logout</a>
+        </div>
+    </nav>
+</div>

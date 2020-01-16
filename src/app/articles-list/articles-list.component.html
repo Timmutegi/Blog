@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let article of articles" class="col md-4">
+            <div class="card" style="width: 15rem;">
+                <img [src]="article.path" style="height: 150px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.title}}</h5>
+                    <hr>
+                    <p class="card-text">{{article.content}}</p>
+                    <button type="button" class="btn btn-info sm">Read More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

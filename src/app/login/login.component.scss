@@ -1,0 +1,48 @@
+ .email {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+     background-color: #9BA7C0;
+     .card {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         height: 23rem;
+         //  border-radius: 0px;
+         .card-body {
+             h6 {
+                 font-size: 12px;
+                 font-weight: bold;
+                 a {
+                     color: black;
+                 }
+                 a:hover {
+                     text-decoration: none;
+                 }
+             }
+         }
+     }
+     input[type="text"],
+     input[type="number"],
+     input[type="email"],
+     input[type="password"] {
+         outline: none;
+         box-shadow: none !important;
+     }
+     input {
+         width: 20em;
+         border-top: none;
+         border-right: none;
+         border-left: none;
+         font-size: 13px;
+         border-radius: 0px;
+     }
+     input:hover {
+         border-bottom: 2px solid #9BA7C0;
+     }
+     button {
+         border-radius: 0px;
+         margin-top: 10px;
+     }
+ }

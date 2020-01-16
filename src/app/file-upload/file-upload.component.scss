@@ -1,0 +1,43 @@
+.dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 300px;
+    border: 2px dashed #f16624;
+    border-radius: 5px;
+    background: white;
+    margin: 10px 0;
+    &.hovering {
+        border: 2px solid #f16624;
+        color: #dadada !important;
+    }
+    input {
+        visibility: hidden;
+    }
+}
+
+progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+}
+
+.card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    button {
+        margin-top: 30px;
+        margin-right: 10px;
+        border-radius: 0px;
+    }
+    input {
+        margin-bottom: 10px;
+    }
+    .gallery {
+        margin-top: 20px;
+        img {
+            height: 200px;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    }
+}

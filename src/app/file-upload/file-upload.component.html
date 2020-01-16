@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="card">
+        <div class="card-header">Upload Photo</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="file-input" type="file" (change)="startUpload($event.target.files)">
+                    <div *ngIf="percentage | async as pct">
+                        <progress class="progress is-info" [value]="pct" max="100">
+                        </progress> {{ pct | number }}%
+                    </div>
+                    <div *ngIf="snapshot | async as snap">
+                        {{ snap.bytesTransferred | filesize }} of {{ snap.totalBytes | filesize }}
+                        <div *ngIf="downloadURL | async as url">
+                            <h3>Results!</h3>
+                            <img [src]="url"><br>
+                            <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+                        </div>
+                        <button (click)="task.pause()" type="button" class="btn btn-warning" [disabled]="!isActive(snap)">Pause</button>
+                        <button (click)="task.cancel()" type="button" class="btn btn-danger" [disabled]="!isActive(snap)">Cancel</button>
+                        <button (click)="task.resume()" type="button" class="btn btn-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" *ngIf="displayGallery === false" (click)="gallery()" class="btn btn-info sm">View Gallery</button>
+                    <button type="button" *ngIf="displayGallery === true" (click)="gallery()" class="btn btn-info sm">Hide Gallery</button>
+                    <div *ngIf="displayGallery == true" class="gallery">
+                        <div class="row">
+                            <div *ngFor="let url of urls" class="col-md-3">
+                                <img [src]="url">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

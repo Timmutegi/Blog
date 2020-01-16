@@ -1,0 +1,30 @@
+<div class="email">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <h6 class="card-title"><a routerLink="/"><span><i class="fas fa-long-arrow-alt-left"></i></span> Go Back</a>
+            </h6>
+            <h3 class="card-title mb-4">Login</h3>
+            <form [formGroup]="loginForm">
+                <div class="form-row mb-4">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" #userEmail formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" required autofocus>
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.pattern">Input a valid email</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" #userPassword formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors}" required>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.min">Password should be at least 6 characters</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info sm" (click)="login(userEmail.value, userPassword.value)">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
