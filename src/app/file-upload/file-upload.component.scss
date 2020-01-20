@@ -21,6 +21,10 @@ progress::-webkit-progress-value {
     transition: width 0.1s ease;
 }
 
+.container-fluid {
+    width: 93%;
+}
+
 .card {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -35,8 +39,11 @@ progress::-webkit-progress-value {
     .gallery {
         margin-top: 20px;
         img {
-            height: 200px;
-            width: 200px;
+            margin: 2px;
+            min-height: 200px;
+            max-height: 400px;
+            min-width: 200px;
+            max-width: 400px;
             margin-bottom: 20px;
         }
     }

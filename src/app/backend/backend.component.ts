@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../crud.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 
 @Component({
   selector: 'app-backend',
@@ -16,6 +18,8 @@ export class BackendComponent implements OnInit {
   selectedPhoto: string;
   displayGallery = false;
   alert: string;
+  Editor = ClassicEditor;
+  editorData: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private formBuilder: FormBuilder, private crud: CrudService, private db: AngularFirestore, private storage: AngularFireStorage) { }
@@ -25,8 +29,8 @@ export class BackendComponent implements OnInit {
 
     this.articleForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required],
-      message: ['', Validators.required]
+      summary: ['', Validators.required],
+      editor: ['', Validators.required]
     });
   }
 
@@ -37,14 +41,12 @@ export class BackendComponent implements OnInit {
   getPhotos() {
   this.db.collection('photos').get().subscribe(
     res => {
-      // console.log(res);
       res.forEach(doc => {
         this.storage.ref(doc.data().path)
         .getDownloadURL().subscribe(url => {
           this.urls.push(url);
         });
       });
-      // console.log(this.urls);
     });
   }
 
@@ -56,7 +58,13 @@ export class BackendComponent implements OnInit {
     this.selectedPhoto = url;
   }
 
-  createArticle(title: string, content: string, message: string) {
+  public onChange( { editor }: ChangeEvent ) {
+        this.editorData = editor.getData();
+        // console.log(this.editorData );
+    }
+
+  createArticle(title: string, content: string) {
+    console.log(1);
     this.submitted = true;
 
     if (this.selectedPhoto == null) {
@@ -68,10 +76,8 @@ export class BackendComponent implements OnInit {
       return;
     }
     const path = this.selectedPhoto;
-    this.crud.addArticle(title, content, path, message);
+    this.crud.addArticle(title, content, path, this.editorData);
     this.articleForm.reset();
     this.submitted = false;
-
   }
-
 }

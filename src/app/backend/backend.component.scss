@@ -7,21 +7,23 @@
              border: 2px solid black;
              box-shadow: none !important;
          }
-         input {
+         input,
+         textarea {
              font-size: 13px;
              border-radius: 0px;
          }
          .gallery {
              margin-top: 20px;
              img {
-                 height: 100px;
-                 width: 100px;
+                 max-height: 400px;
+                 max-width: 400px;
                  margin-bottom: 20px;
              }
          }
          button {
              border-radius: 0px;
              margin-right: 5px;
+             margin-top: 10px;
              outline: none;
          }
      }

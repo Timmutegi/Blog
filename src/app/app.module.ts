@@ -17,6 +17,15 @@ import { DropzoneDirective } from './dropzone.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FilesizePipe } from './filesize.pipe';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { HomeComponent } from './home/home.component';
+import { BlogpostsComponent } from './blogposts/blogposts.component';
+import { BlogpostdetailsComponent } from './blogpostdetails/blogpostdetails.component';
+import { FrontendNavbarComponent } from './frontend-navbar/frontend-navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeroSectionComponent } from './hero-section/hero-section.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +36,14 @@ import { ArticlesListComponent } from './articles-list/articles-list.component';
     DropzoneDirective,
     FileUploadComponent,
     FilesizePipe,
-    ArticlesListComponent
+    ArticlesListComponent,
+    ArticleDetailsComponent,
+    HomeComponent,
+    BlogpostsComponent,
+    BlogpostdetailsComponent,
+    FrontendNavbarComponent,
+    FooterComponent,
+    HeroSectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +53,8 @@ import { ArticlesListComponent } from './articles-list/articles-list.component';
     AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    CKEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

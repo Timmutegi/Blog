@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate() {
-    if (localStorage.getItem('user') == null) {
+    if (sessionStorage.getItem('user') == null) {
       this.router.navigate(['/']);
       return false;
     }

@@ -1,0 +1,32 @@
+$button: #ffff00;
+.articles {
+    background-color: white;
+    min-height: 500px;
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .row {
+            margin-top: 30px;
+            button {
+                border-radius: 0px;
+                border: 2px solid $button;
+                color: black;
+                background-color: $button;
+                font-weight: 600;
+            }
+            .card-title {
+                font-weight: 600;
+            }
+            .card-text {
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+        margin: 0 auto;
+    }
+}

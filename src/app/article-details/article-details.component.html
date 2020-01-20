@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div *ngIf="edit === false" class="container">
+    <div class="col-md-8">
+        <div class="card">
+            <img [src]="path" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{title}}</strong></h5>
+                <hr>
+                <p class="card-text">{{summary}} </p>
+                <hr>
+                <button (click)="update()" class="btn btn-primary">Update</button>
+                <button (click)="delete()" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="edit === true" class="container-fluid">
+    <div class="card" id="update">
+        <div class="card-header">Update Article</div>
+        <div class="card-body">
+            <button type="button" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Choose
+                Photo</button>
+            <button type="button" routerLink="/gallery" style="margin-bottom: 20px" class="btn btn-info sm">Upload
+                Photo</button>
+            <div *ngIf="displayGallery == true" class="gallery">
+                <div class="row">
+                    <div *ngFor="let url of urls" class="col-md-4">
+                        <a (click)="choosePhoto(url)"><img [src]="url"></a>
+                    </div>
+                </div>
+                <h4 class="selected-photo" *ngIf="selectedPhoto"><strong>Selected Photo</strong></h4>
+                <div *ngIf="selectedPhoto" class="row">
+                    <div class="col-md-6">
+                        <div class="selected">
+                            <img src={{selectedPhoto}}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="submitted == true && selectedPhoto == null" class="message">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{alert}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <form [formGroup]="updateForm">
+                <div class="form-row mb-4">
+                    <div class="col-md-12">
+                        <label for="content">Summary</label>
+                        <input type="text" placeholder="Title" #title formControlName="title" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.title.errors}" autofocus>
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback ">
+                            <div *ngIf="f.title.errors.required ">Title is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="content">Summary</label>
+                    <textarea class="form-control" spellcheck="true" #summary formControlName="summary" [ngClass]="{ 'is-invalid': submitted && f.summary.errors}" required></textarea>
+                    <div *ngIf="submitted && f.summary.errors" class="invalid-feedback ">
+                        <div *ngIf="f.summary.errors.required">Summary is required</div>
+                    </div>
+                </div>
+                <label for="content">Message</label>
+                <ckeditor #editor formControlName="editor" [editor]="Editor" (change)="onChange($event)" tagName="textarea" [ngClass]="{ 'is-invalid': submitted && f.editor.errors}"></ckeditor>
+                <div *ngIf="submitted && f.editor.errors" class="invalid-feedback ">
+                    <div *ngIf="f.editor.errors.required ">Editor is required</div>
+                </div>
+                <button type="submit" class="btn btn-success sm" (click)="updateArticle(title.value, summary.value)">Update Article</button>
+            </form>
+        </div>
+    </div>
+</div>

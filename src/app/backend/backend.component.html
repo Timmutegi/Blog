@@ -1,22 +1,22 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container-fluid">
     <div class="card">
         <div class="card-header">
             Add Article
         </div>
         <div class="card-body">
             <button type="button" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Choose Photo</button>
-            <button type="button" routerLink="/gallery" style="margin-bottom: 20px" class="btn btn-info sm">Upload Photo</button>
+            <button type="button" routerLink="/gallery" style="margin-bottom: 20px" class="btn btn-success sm">Upload Photo</button>
             <div *ngIf="displayGallery == true" class="gallery">
                 <div class="row">
-                    <div *ngFor="let url of urls" class="col-md-2">
-                        <a (click)="choosePhoto(url)" routerLink="#"><img [src]="url"></a>
+                    <div *ngFor="let url of urls" class="col-md-4">
+                        <a (click)="choosePhoto(url)"><img [src]="url"></a>
                     </div>
 
                 </div>
                 <h4 *ngIf="selectedPhoto">Selected Photo</h4>
                 <div *ngIf="selectedPhoto" class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="selected">
                             <img src={{selectedPhoto}}>
                         </div>
@@ -33,31 +33,24 @@
             </div>
             <form [formGroup]="articleForm">
                 <div class="form-row mb-4">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <input type="text" placeholder="Title" #title formControlName="title" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.title.errors}" autofocus>
                         <div *ngIf="submitted && f.title.errors" class="invalid-feedback ">
                             <div *ngIf="f.title.errors.required ">Title is required</div>
                         </div>
                     </div>
                 </div>
-                <div class="form-row mb-4">
-                    <div class="col-md-6">
-                        <input type="text" placeholder="Content" #content formControlName="content" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.content.errors}">
-                        <div *ngIf="submitted && f.content.errors" class="invalid-feedback ">
-                            <div *ngIf="f.content.errors.required">Content is required</div>
-                        </div>
+                <div class="form-group">
+                    <textarea class="form-control" spellcheck="true" #summary formControlName="summary" placeholder="A summary of the article" [ngClass]="{ 'is-invalid': submitted && f.summary.errors}"></textarea>
+                    <div *ngIf="submitted && f.summary.errors" class="invalid-feedback ">
+                        <div *ngIf="f.summary.errors.required">Summary is required</div>
                     </div>
                 </div>
-                <label for="content">Message</label>
-                <div class="form-row mb-4">
-                    <div class="col-md-6">
-                        <textarea rows="10" cols="90" spellcheck="true" #message formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors}" required></textarea>
-                        <div *ngIf="submitted && f.message.errors" class="invalid-feedback ">
-                            <div *ngIf="f.message.errors.required ">Message is required</div>
-                        </div>
-                    </div>
+                <ckeditor #editor formControlName="editor" [editor]="Editor" (change)="onChange($event)" tagName="textarea" [ngClass]="{ 'is-invalid': submitted && f.editor.errors}"></ckeditor>
+                <div *ngIf="submitted && f.editor.errors" class="invalid-feedback ">
+                    <div *ngIf="f.editor.errors.required ">Editor is required</div>
                 </div>
-                <button type="submit" class="btn btn-success sm" (click)="createArticle(title.value, content.value, message.value)">Create Article</button>
+                <button type="submit" class="btn btn-success sm" (click)="createArticle(title.value, summary.value)">Publish</button>
             </form>
         </div>
     </div>

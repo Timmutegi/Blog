@@ -1,0 +1,71 @@
+$purple: #521151;
+.Navbar {
+    width: 100%;
+    background-color: $purple;
+    display: flex;
+    padding: 16px;
+    min-height: 10vh;
+    font-family: sans-serif;
+    color: white;
+    // #Brand {
+    //     padding-left: 90px;
+    // }
+    a {
+        color: white;
+        font-weight: bold;
+    }
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+    .active-link {
+        color: black !important;
+    }
+}
+
+.Navbar-brand {
+    font-size: 25px;
+}
+
+.Navbar-Link {
+    padding-right: 20px;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.Navbar-Items {
+    display: flex;
+}
+
+.Navbar-Items--right {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.Navbar-Link-toggle {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .Navbar-Items,
+    .Navbar {
+        flex-direction: column;
+        width: 100%;
+    }
+    .Navbar-Items {
+        display: none;
+    }
+    .Navbar-Items--right {
+        margin-left: 0;
+    }
+    .Navbar-ToggleShow {
+        display: flex;
+        background-color: $purple;
+    }
+    .Navbar-Link-toggle {
+        align-self: flex-end;
+        display: initial;
+        position: absolute;
+        cursor: pointer;
+    }
+}

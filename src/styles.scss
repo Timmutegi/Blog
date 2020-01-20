@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ck-editor__editable_inline {
+    min-height: 500px;
+}
+
+.btn:focus,
+.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn:hover {
+    color: white !important;
+    background-color: #521151 !important;
+    border: 2px solid #521151 !important;
+}

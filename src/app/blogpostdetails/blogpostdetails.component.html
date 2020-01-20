@@ -1,0 +1,19 @@
+<app-frontend-navbar></app-frontend-navbar>
+<app-hero-section></app-hero-section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <img [src]="path" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>{{title}}</strong></h5>
+                    <hr>
+                    <p class="card-text" [innerHTML]="message"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

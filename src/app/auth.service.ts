@@ -17,7 +17,7 @@ export class AuthService {
           res => {
             resolve(res);
             console.log(res);
-            localStorage.setItem('user', 'ok');
+            sessionStorage.setItem('user', 'ok');
             this.router.navigate(['/backend']);
           },
           err => reject(err)
@@ -27,7 +27,8 @@ export class AuthService {
 
     async logout() {
     await this.angularFireAuth.auth.signOut();
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('articleID');
     this.router.navigate(['/']);
   }
 }

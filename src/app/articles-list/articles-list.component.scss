@@ -1,12 +1,24 @@
-.row {
-    margin-top: 30px;
-    button {
-        border-radius: 0px;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .row {
+        margin-top: 30px;
+        button {
+            border-radius: 0px;
+            font-size: 13px;
+        }
+        .card-title {
+            font-weight: 600;
+        }
+        .card-text {
+            font-size: 13px;
+        }
     }
-    .card-title {
-        font-weight: 600;
-    }
-    .card-text {
-        font-size: 13px;
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+        margin: 0 auto;
     }
 }

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container-fluid">
     <div class="card">
         <div class="card-header">Upload Photo</div>
         <div class="card-body">
@@ -12,11 +12,11 @@
                     </div>
                     <div *ngIf="snapshot | async as snap">
                         {{ snap.bytesTransferred | filesize }} of {{ snap.totalBytes | filesize }}
-                        <div *ngIf="downloadURL | async as url">
+                        <!-- <div *ngIf="downloadURL | async as url">
                             <h3>Results!</h3>
                             <img [src]="url"><br>
                             <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
-                        </div>
+                        </div> -->
                         <button (click)="task.pause()" type="button" class="btn btn-warning" [disabled]="!isActive(snap)">Pause</button>
                         <button (click)="task.cancel()" type="button" class="btn btn-danger" [disabled]="!isActive(snap)">Cancel</button>
                         <button (click)="task.resume()" type="button" class="btn btn-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
@@ -29,7 +29,7 @@
                     <button type="button" *ngIf="displayGallery === true" (click)="gallery()" class="btn btn-info sm">Hide Gallery</button>
                     <div *ngIf="displayGallery == true" class="gallery">
                         <div class="row">
-                            <div *ngFor="let url of urls" class="col-md-3">
+                            <div *ngFor="let url of urls">
                                 <img [src]="url">
                             </div>
                         </div>

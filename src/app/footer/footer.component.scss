@@ -1,0 +1,65 @@
+$button: #ffff00;
+.footer {
+    background-color: black;
+    min-height: 420px;
+    color: white;
+    .container-fluid {
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        .row {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            input {
+                font-size: 13px;
+                padding-left: 10px;
+                width: 25em;
+                margin-bottom: 10px;
+                border: 2px solid white;
+            }
+            textarea {
+                font-size: 13px;
+                padding-left: 10px;
+                width: 25em;
+                border: 2px solid white;
+            }
+            button {
+                border-radius: 0px;
+                font-size: 13px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                background-color: $button;
+                color: black;
+                border: 2px solid $button;
+            }
+        }
+    }
+    .social {
+        width: 100%;
+        text-align: center;
+        i {
+            color: white;
+        }
+        hr {
+            width: 80%;
+            border: 1px solid white;
+        }
+        p {
+            font-size: 13px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    input {
+        width: 20em !important;
+    }
+    textarea {
+        width: 20em !important;
+    }
+}

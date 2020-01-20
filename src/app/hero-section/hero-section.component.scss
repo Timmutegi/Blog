@@ -1,0 +1,38 @@
+$purple: #521151;
+$button: #ffff00;
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    min-height: 450px;
+    background-color: $purple;
+    img {
+        height: 200px;
+        width: 200px;
+    }
+    button {
+        border-radius: 0px;
+        color: black;
+        border: 2px solid $button;
+        background-color: $button;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    p {
+        font-size: 13px;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    img {
+        margin-left: 0px !important;
+    }
+}
