@@ -20,20 +20,18 @@ export class HomeComponent implements OnInit {
     this.crud.getArticles().subscribe(
       res => {
         res.forEach(doc => {
-          this.articles.push({title: doc.data().title, content: doc.data().content, path: doc.data().path});
+          this.articles.push({title: doc.data().title, content: doc.data().content, path: doc.data().path, ID: doc.id});
         });
-        // console.log(this.articles);
       }
     );
   }
 
-  readMore(path) {
+  readMore(ID: string) {
     this.crud.getArticles().subscribe(
       res => {
         res.forEach(doc => {
-          if (path === doc.data().path) {
-            localStorage.setItem('articleID', doc.id);
-            console.log(localStorage.getItem('articleID'));
+          if (ID === doc.id) {
+            sessionStorage.setItem('articleID', doc.id);
             this.router.navigate(['articles/article']);
           }
         });
