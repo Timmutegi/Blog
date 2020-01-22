@@ -1,18 +1,20 @@
 $button: #ffff00;
-.product {
-    background-color: white;
-    min-height: 200px;
-    padding-top: 30px;
+.all {
     background-image: url("/assets/images/background2.png");
     background-size: cover;
-    background-position: center center;
+    background-position: center center fixed;
     background-repeat: no-repeat;
+}
+
+#product {
+    min-height: 200px;
+    padding-top: 30px;
     .card {
         min-height: 200px;
         text-align: center;
         background-image: url("/assets/images/product-background.jpg");
         background-size: cover;
-        background-position: center center;
+        background-position: center center fixed;
         background-repeat: no-repeat;
         display: flex;
         align-items: center;
@@ -27,14 +29,9 @@ $button: #ffff00;
 }
 
 .articles {
-    background-color: white;
     min-height: 500px;
     padding-top: 50px;
     padding-bottom: 50px;
-    background-image: url("/assets/images/background2.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
     .container {
         display: flex;
         align-items: center;
@@ -62,20 +59,16 @@ $button: #ffff00;
 }
 
 @media only screen and (max-width: 768px) {
-    .product {
-        background: url("/assets/images/background1.jpg");
-        background-size: cover;
-        background-position: center center;
+    .all {
+        background-image: url("/assets/images/background3.png");
+        background-size: 100% 100%;
+        background-position: center center fixed;
         background-repeat: no-repeat;
+    }
+    .product {
         .card {
             width: 18rem;
         }
-    }
-    .articles {
-        background: url("/assets/images/background1.jpg");
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
     }
     .container {
         .card {

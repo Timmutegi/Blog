@@ -21,10 +21,9 @@ progress::-webkit-progress-value {
     transition: width 0.1s ease;
 }
 
-.container-fluid {
-    width: 93%;
-}
-
+// .container-fluid {
+//     width: 93%;
+// }
 .card {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -35,16 +34,29 @@ progress::-webkit-progress-value {
     }
     input {
         margin-bottom: 10px;
+        font-size: 13px;
     }
     .gallery {
         margin-top: 20px;
         img {
-            margin: 2px;
-            min-height: 200px;
+            margin-left: 15px;
             max-height: 400px;
-            min-width: 200px;
             max-width: 400px;
             margin-bottom: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .gallery {
+        .row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            img {
+                max-height: 200px !important;
+                max-width: 200px !important;
+            }
         }
     }
 }

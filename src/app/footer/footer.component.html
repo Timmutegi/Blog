@@ -1,12 +1,21 @@
 <div class="footer">
     <div class="container-fluid">
         <div class="row">
-            <form [formGroup]="myForm" action="https://formspree.io/lobby@asha.co.ke">
+            <form [formGroup]="myForm" action="https://formspree.io/xzbeogkk" method="POST">
                 <h5>Get in Touch with Us</h5><br>
-                <input type="text" name="name" placeholder="Fullname"><br>
-                <input type="text" name="name" placeholder="Email"><br>
-                <textarea id="textarea" name="name" placeholder="Message"></textarea><br><br>
-                <button type="submit" class="btn btn-info">Send Message</button>
+                <div *ngIf="message == true" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Message sent</strong>
+                    <a type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <input type="text" formControlName="fullname" name="fullname" placeholder="Fullname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors}">
+
+                <input type="email" formControlName="email" name="email" placeholder="Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
+
+                <textarea id="textarea" formControlName="message" name="message" placeholder="Message" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.message.errors}"></textarea>
+
+                <button type="submit" value="send" (click)="submit()" class="btn btn-info">Send Message</button>
             </form>
         </div>
         <div class="row">

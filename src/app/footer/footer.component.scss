@@ -21,12 +21,20 @@ $button: #ffff00;
                 width: 25em;
                 margin-bottom: 10px;
                 border: 2px solid white;
+                border-radius: 0px;
             }
             textarea {
                 font-size: 13px;
                 padding-left: 10px;
                 width: 25em;
                 border: 2px solid white;
+                border-radius: 0px;
+                margin-bottom: 10px;
+            }
+            .invalid-feedback {
+                margin-left: 10px;
+                font-size: 11px;
+                color: white;
             }
             button {
                 border-radius: 0px;

@@ -1,6 +1,7 @@
 .container {
     .card {
         margin-top: 30px;
+        margin-bottom: 50px;
         img {
             max-height: 400px;
         }
@@ -46,4 +47,19 @@
 
 button {
     font-size: 13px;
+}
+
+@media only screen and (max-width: 768px) {
+    .gallery {
+        .row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            img {
+                max-height: 200px !important;
+                max-width: 200px !important;
+            }
+        }
+    }
 }

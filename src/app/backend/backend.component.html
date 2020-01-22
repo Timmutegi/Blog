@@ -5,7 +5,8 @@
             Add Article
         </div>
         <div class="card-body">
-            <button type="button" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Choose Photo</button>
+            <button type="button" *ngIf="displayGallery == false" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Choose Photo</button>
+            <button type="button" *ngIf="displayGallery == true" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Hide Photos</button>
             <button type="button" routerLink="/gallery" style="margin-bottom: 20px" class="btn btn-success sm">Upload Photo</button>
             <div *ngIf="displayGallery == true" class="gallery">
                 <div class="row">
