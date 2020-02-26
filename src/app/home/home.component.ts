@@ -19,9 +19,16 @@ export class HomeComponent implements OnInit {
   getArticles() {
     this.crud.getArticles().subscribe(
       res => {
-        res.forEach(doc => {
-          this.articles.push({title: doc.data().title, content: doc.data().content, path: doc.data().path, ID: doc.id});
-        });
+        for (let i = 0; i <= 4; i++) {
+          res.forEach(doc => {
+            this.articles.push({
+              title: doc.data().title,
+              content: doc.data().content,
+              path: doc.data().path,
+              ID: doc.id
+            });
+          });
+        }
       }
     );
   }
