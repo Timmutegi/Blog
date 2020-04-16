@@ -38,11 +38,21 @@ progress::-webkit-progress-value {
     }
     .gallery {
         margin-top: 20px;
-        img {
+        .row img {
+            cursor: pointer;
             margin-left: 15px;
-            max-height: 400px;
-            max-width: 400px;
+            max-height: 150px;
+            max-width: 150px;
             margin-bottom: 20px;
+        }
+        .modal-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                max-height: 400px;
+                max-width: 450px;
+            }
         }
     }
 }
