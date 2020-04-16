@@ -9,6 +9,7 @@ import { CrudService } from '../crud.service';
 })
 export class BlogpostsComponent implements OnInit {
   articles: object[] = [];
+  blogposts: any;
 
   constructor(private router: Router, private crud: CrudService ) { }
 
@@ -22,7 +23,7 @@ export class BlogpostsComponent implements OnInit {
         res.forEach(doc => {
           this.articles.push({title: doc.data().title, content: doc.data().content, path: doc.data().path, ID: doc.id});
         });
-        // console.log(this.articles);
+        this.blogposts = this.articles;
       }
     );
   }
