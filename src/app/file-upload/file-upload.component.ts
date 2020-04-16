@@ -12,8 +12,15 @@ import { tap } from 'rxjs/operators';
 })
 export class FileUploadComponent implements OnInit {
 
-  urls: string[] = [];
+  urls: object[] = [];
+  photos: any;
   displayGallery = false;
+  photo: string;
+  doc: string;
+  message: string;
+  toggle = false;
+  progress: string;
+  state: boolean;
 
   // Main Task
   task: AngularFireUploadTask;
@@ -45,20 +52,47 @@ export class FileUploadComponent implements OnInit {
   getPhotos() {
   this.db.collection('photos').get().subscribe(
     res => {
-      // console.log(res);
       res.forEach(doc => {
         this.storage.ref(doc.data().path)
         .getDownloadURL().subscribe(url => {
-          this.urls.push(url);
+          this.urls.push({url, id: doc.id});
         });
       });
-      // console.log(this.urls);
+      this.photos = this.urls;
     });
   }
 
+  deletePhoto() {
+    this.db.collection('photos').doc(this.doc).delete().then(
+      res => {
+        this.photo = null;
+        this.message = 'Photo has successfully been deleted';
+        this.urls = [];
+        this.getPhotos();
+        this.toggle = true;
+      }
+    ).catch(
+      err => {
+        this.message = `Error deleting photo ${err}`;
+      }
+    );
+  }
+
+  close() {
+    this.message = null;
+    this.toggle = false;
+  }
+
+  displayPhoto(url: string, id: string) {
+    console.log(url, id);
+    this.photo = url;
+    this.doc = id;
+  }
 
   startUpload(event: FileList) {
     // The File object
+    this.state = true;
+    this.progress = null;
     const file = event.item(0);
 
     // Client-side validation example
@@ -81,6 +115,10 @@ export class FileUploadComponent implements OnInit {
       tap(snap => {
         if (snap.bytesTransferred === snap.totalBytes) {
           this.db.collection('photos').add({path, size: snap.totalBytes});
+          this.state = false;
+          this.urls = [];
+          this.getPhotos();
+          this.progress = 'Upload Successful';
         }
       })
     );
