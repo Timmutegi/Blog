@@ -17,9 +17,12 @@
                             <img [src]="url"><br>
                             <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
                         </div> -->
-                        <button (click)="task.pause()" type="button" class="btn btn-warning" [disabled]="!isActive(snap)">Pause</button>
-                        <button (click)="task.cancel()" type="button" class="btn btn-danger" [disabled]="!isActive(snap)">Cancel</button>
-                        <button (click)="task.resume()" type="button" class="btn btn-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+                        <p>{{progress}}</p>
+                        <p *ngIf="this.state === true">
+                            <button (click)="task.pause()" type="button" class="btn btn-warning" [disabled]="!isActive(snap)">Pause</button>
+                            <button (click)="task.cancel()" type="button" class="btn btn-danger" [disabled]="!isActive(snap)">Cancel</button>
+                            <button (click)="task.resume()" type="button" class="btn btn-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -29,8 +32,24 @@
                     <button type="button" *ngIf="displayGallery === true" (click)="gallery()" class="btn btn-info sm">Hide Gallery</button>
                     <div *ngIf="displayGallery == true" class="gallery">
                         <div class="row">
-                            <div *ngFor="let url of urls">
-                                <img [src]="url">
+                            <div *ngFor="let photo of photos">
+                                <img src={{photo.url}} (click)="displayPhoto(photo.url, photo.id)" data-toggle="modal" data-target="#imageModal">
+                            </div>
+                        </div>
+                        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Photo Details</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img *ngIf="photo" [src]="photo"> {{message}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Close</button>
+                                        <button type="button" *ngIf="toggle === false" class="btn btn-danger" (click)="deletePhoto()">Delete</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
