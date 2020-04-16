@@ -8,9 +8,9 @@ export class CrudService {
 
   constructor(private db: AngularFirestore) { }
 
-  addArticle(title: string, content: string, path: string, message) {
+  addArticle(title: string, content: string, path: string, path1: string, message) {
     this.db.collection('articles').add({
-      title, content, path, message
+      title, content, path, path1, message
     }).then(res => {
       console.log(res);
     }).catch(err => {
