@@ -16,8 +16,9 @@ export class BackendComponent implements OnInit {
   articleForm: FormGroup;
   urls: string[] = [];
   selectedPhoto: string;
-  displayGallery = false;
-  alert: string;
+  authorPhoto: string;
+  message1: string;
+  message2: string;
   Editor = ClassicEditor;
   editorData: string;
 
@@ -50,12 +51,12 @@ export class BackendComponent implements OnInit {
     });
   }
 
-  gallery() {
-    this.displayGallery = !this.displayGallery;
+  chooseArticlePhoto(url: string) {
+    this.selectedPhoto = url;
   }
 
-  choosePhoto(url: string) {
-    this.selectedPhoto = url;
+  chooseAuthorPhoto(url: string) {
+    this.authorPhoto = url;
   }
 
   public onChange( { editor }: ChangeEvent ) {
@@ -64,19 +65,22 @@ export class BackendComponent implements OnInit {
     }
 
   createArticle(title: string, content: string) {
-    console.log(1);
     this.submitted = true;
 
     if (this.selectedPhoto == null) {
-      this.alert = 'Photo is not selected';
-      console.log(this.alert);
+      this.message1 = 'Article Photo is not selected';
+    }
+
+    if (this.authorPhoto == null) {
+      this.message2 = 'Author photo is not selected';
     }
 
     if (this.articleForm.invalid) {
       return;
     }
-    const path = this.selectedPhoto;
-    this.crud.addArticle(title, content, path, this.editorData);
+    const path1 = this.selectedPhoto;
+    const path2 = this.authorPhoto;
+    this.crud.addArticle(title, content, path1, path2, this.editorData);
     this.articleForm.reset();
     this.submitted = false;
   }
