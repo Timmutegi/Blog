@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'gallery', component: FileUploadComponent, canActivate: [AuthGuard] },
   { path: 'blogposts', component: ArticlesListComponent, canActivate: [AuthGuard] },
   { path: 'blogposts/blogpost', component: ArticleDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'blogposts/:ID', component: ArticleDetailsComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent},
   { path: 'articles', component: BlogpostsComponent },
   { path: 'articles/article', component: BlogpostdetailsComponent },
