@@ -7,10 +7,10 @@
     </div>
     <div class="row">
         <div *ngFor="let post of blogposts" class="col md-4 mb-4">
-            <div class="card" style="width: 15rem;">
+            <div class="card" style="width: 16rem;">
                 <img [src]="post.path" style="height: 150px" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{post.title}}</h5>
+                    <h6 class="card-title">{{post.title}}</h6>
                     <hr>
                     <p class="card-text">{{post.content}}</p>
                     <button type="button" (click)="readArticle(post.id)" class="btn btn-info sm">Read Article</button>
