@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ArticlesListComponent implements OnInit {
   articles: object[] = [];
+  blogposts: any;
+  isLoading = true;
 
   constructor(private crud: CrudService, private router: Router) { }
 
@@ -21,22 +23,15 @@ export class ArticlesListComponent implements OnInit {
       res => {
         res.forEach(doc => {
           this.articles.push({title: doc.data().title, content: doc.data().content, path: doc.data().path, id: doc.id});
+          this.isLoading = false;
         });
-        console.log(this.articles);
+        this.blogposts = this.articles;
       }
     );
   }
 
-  readMore(path) {
-    this.crud.getArticles().subscribe(
-      res => {
-        res.forEach(doc => {
-          if (path === doc.data().path) {
-            sessionStorage.setItem('articleID', doc.id);
-            this.router.navigate(['blogposts/blogpost']);
-          }
-        });
-      }
-    );
+  readArticle(ID: string) {
+    this.router.navigate([`blogposts/${ID}`]);
   }
+
 }
