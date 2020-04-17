@@ -120,9 +120,12 @@ export class ArticleDetailsComponent implements OnInit {
     this.submitted = true;
 
     if (this.articlePhoto == null) {
-      this.alert = 'Photo is not selected';
-      console.log(this.alert);
+      this.message1 = 'Article Photo is not selected';
     }
+
+    if (this.authorPhoto == null) {
+       this.message2 = 'Author Photo is not selected';
+     }
 
     if (this.updateForm.invalid) {
       return;
