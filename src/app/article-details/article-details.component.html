@@ -1,5 +1,10 @@
 <app-navbar></app-navbar>
-<div *ngIf="edit === false" class="container">
+<div *ngIf="isLoading === true" class="text-center">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div *ngIf="edit === false && isLoading === false" class="container">
     <div class="col-md-8">
         <div class="card">
             <img [src]="path" class="card-img-top" alt="...">
@@ -14,35 +19,48 @@
         </div>
     </div>
 </div>
-<div *ngIf="edit === true" class="container-fluid">
+<div *ngIf="edit === true && isLoading === false;" class="container-fluid">
     <div class="card" id="update">
         <div class="card-header">Update Article</div>
         <div class="card-body">
-            <button type="button" (click)="gallery()" style="margin-bottom: 20px" class="btn btn-info sm">Choose
-                Photo</button>
-            <button type="button" routerLink="/gallery" style="margin-bottom: 20px" class="btn btn-info sm">Upload
-                Photo</button>
-            <div *ngIf="displayGallery == true" class="gallery">
+            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                Choose Article Photo
+            </button>
+            <button type="button" routerLink="/gallery" class="btn btn-success sm">Upload Photo</button>
+
+            <div class="collapse gallery" id="collapseExample1">
                 <div class="row">
-                    <div *ngFor="let url of urls" class="col-md-4">
-                        <a (click)="choosePhoto(url)"><img [src]="url"></a>
-                    </div>
-                </div>
-                <h4 class="selected-photo" *ngIf="selectedPhoto"><strong>Selected Photo</strong></h4>
-                <div *ngIf="selectedPhoto" class="row">
-                    <div class="col-md-6">
-                        <div class="selected">
-                            <img src={{selectedPhoto}}>
-                        </div>
+                    <div *ngFor="let url of urls" class="col-md-2">
+                        <a (click)="selectArticlePhoto(url)"><img [src]="url"></a>
                     </div>
                 </div>
             </div>
-            <div *ngIf="submitted == true && selectedPhoto == null" class="message">
+
+            <div *ngIf="submitted == true && articlePhoto == null" class="message">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>{{alert}}</strong>
+                    <strong>{{message1}}</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                </div>
+            </div>
+
+            <div *ngIf="submitted == true && authorPhoto == null" class="message">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{message2}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="gallery">
+                <h6 *ngIf="articlePhoto">Selected Article Photo :</h6>
+                <div *ngIf="articlePhoto" class="row">
+                    <div class="col-md-6">
+                        <div class="selected">
+                            <img src={{articlePhoto}}>
+                        </div>
+                    </div>
                 </div>
             </div>
             <form [formGroup]="updateForm">
@@ -67,8 +85,40 @@
                 <div *ngIf="submitted && f.editor.errors" class="invalid-feedback ">
                     <div *ngIf="f.editor.errors.required ">Editor is required</div>
                 </div>
-                <button type="submit" class="btn btn-success sm" (click)="updateArticle(title.value, summary.value)">Update Article</button>
+                <div class="form-group bio">
+                    <textarea class="form-control" spellcheck="true" #bio formControlName="bio" placeholder="Author's Bio" [ngClass]="{ 'is-invalid': submitted && f.bio.errors}"></textarea>
+                    <div *ngIf="submitted && f.bio.errors" class="invalid-feedback ">
+                        <div *ngIf="f.bio.errors.required">Author's bio is required</div>
+                    </div>
+                </div>
             </form>
+            <p>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Choose Author Photo
+                </button>
+            </p>
+            <div class="collapse gallery" id="collapseExample">
+                <div class="row">
+                    <div *ngFor="let url of urls" class="col-md-2">
+                        <a (click)="selectAuthorPhoto(url)"><img [src]="url"></a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="gallery">
+                <h6 *ngIf="authorPhoto">Selected Author Photo</h6>
+                <div *ngIf="authorPhoto" class="row">
+                    <div class="col-md-6">
+                        <div class="selected">
+                            <img src={{authorPhoto}}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success sm" (click)="updateArticle(title.value, summary.value, bio.value)">Update
+                                Article</button>
+
         </div>
     </div>
 </div>
+<app-backend-footer></app-backend-footer>

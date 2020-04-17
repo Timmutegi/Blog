@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CrudService } from '../crud.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -18,29 +18,41 @@ export class ArticleDetailsComponent implements OnInit {
   message: string;
   summary: string;
   path: string;
+  path1: string;
+  bio: string;
   articleID: string;
   edit = false;
-  displayGallery = false;
-  selectedPhoto: string;
+  isLoading = true;
+  articlePhoto: string;
+  authorPhoto: string;
   urls: string[] = [];
   updateForm: FormGroup;
   submitted: boolean;
   alert: string;
   Editor = ClassicEditor;
   public editorData: string;
+  message1: string;
+  message2: string;
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private db: AngularFirestore, private formBuilder: FormBuilder, private crud: CrudService, private router: Router, private storage: AngularFireStorage) { }
+  constructor(
+    private db: AngularFirestore,
+    private formBuilder: FormBuilder,
+    private crud: CrudService,
+    private router: Router,
+    private storage: AngularFireStorage,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.articleID = this.activatedRoute.snapshot.params.ID;
     this.displayArticle();
     this.getPhotos();
 
     this.updateForm = this.formBuilder.group({
       title: ['', Validators.required],
       summary: ['', Validators.required],
-      editor: ['', Validators.required]
-
+      editor: ['', Validators.required],
+      bio: ['', Validators.required]
     });
   }
 
@@ -49,14 +61,15 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   displayArticle() {
-    this.articleID = sessionStorage.getItem('articleID');
     this.db.collection('articles').doc(this.articleID).get().subscribe(
       response => {
         this.title = response.data().title;
         this.editorData = response.data().message;
         this.summary = response.data().content;
         this.path = response.data().path;
-        console.log(this.editorData);
+        this.path1 = response.data().path1;
+        this.bio = response.data().bio;
+        this.isLoading = false;
       }
     );
   }
@@ -66,7 +79,9 @@ export class ArticleDetailsComponent implements OnInit {
     this.updateForm.patchValue({title: this.title});
     this.updateForm.patchValue({editor: this.editorData});
     this.updateForm.patchValue({summary: this.summary});
-    this.selectedPhoto = this.path;
+    this.updateForm.patchValue({bio: this.bio});
+    this.articlePhoto = this.path;
+    this.authorPhoto = this.path1;
   }
 
   delete() {
@@ -74,12 +89,12 @@ export class ArticleDetailsComponent implements OnInit {
     this.router.navigate(['/blogposts']);
   }
 
-  gallery() {
-    this.displayGallery = !this.displayGallery;
+  selectArticlePhoto(url: string) {
+    this.articlePhoto = url;
   }
 
-  choosePhoto(url: string) {
-    this.selectedPhoto = url;
+  selectAuthorPhoto(url: string) {
+    this.authorPhoto = url;
   }
 
   getPhotos() {
@@ -101,10 +116,10 @@ export class ArticleDetailsComponent implements OnInit {
       // console.log(this.editorData );
   }
 
-  updateArticle(title: string, content: string) {
+  updateArticle(title: string, content: string, bio: string) {
     this.submitted = true;
 
-    if (this.selectedPhoto == null) {
+    if (this.articlePhoto == null) {
       this.alert = 'Photo is not selected';
       console.log(this.alert);
     }
@@ -113,8 +128,9 @@ export class ArticleDetailsComponent implements OnInit {
       return;
     }
 
-    const path = this.selectedPhoto;
-    this.crud.updateArticle(title, content, path, this.editorData);
+    const path = this.articlePhoto;
+    const path1 = this.authorPhoto;
+    this.crud.updateArticle(title, content, path, path1, this.editorData, bio);
     this.updateForm.reset();
     this.submitted = false;
   }
