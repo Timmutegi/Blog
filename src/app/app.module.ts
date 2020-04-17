@@ -25,6 +25,7 @@ import { FrontendNavbarComponent } from './frontend-navbar/frontend-navbar.compo
 import { FooterComponent } from './footer/footer.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { BackendFooterComponent } from './backend-footer/backend-footer.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FrontendNavbarComponent,
     FooterComponent,
     HeroSectionComponent,
+    BackendFooterComponent,
   ],
   imports: [
     BrowserModule,
