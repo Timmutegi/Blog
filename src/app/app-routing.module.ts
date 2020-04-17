@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'backend', component: BackendComponent, canActivate: [AuthGuard] },
   { path: 'gallery', component: FileUploadComponent, canActivate: [AuthGuard] },
   { path: 'blogposts', component: ArticlesListComponent, canActivate: [AuthGuard] },
-  { path: 'blogposts/blogpost', component: ArticleDetailsComponent, canActivate: [AuthGuard] },
   { path: 'blogposts/:ID', component: ArticleDetailsComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent},
   { path: 'articles', component: BlogpostsComponent },
