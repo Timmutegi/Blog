@@ -31,7 +31,8 @@ export class BackendComponent implements OnInit {
     this.articleForm = this.formBuilder.group({
       title: ['', Validators.required],
       summary: ['', Validators.required],
-      editor: ['', Validators.required]
+      editor: ['', Validators.required],
+      bio: ['', Validators.required]
     });
   }
 
@@ -61,10 +62,9 @@ export class BackendComponent implements OnInit {
 
   public onChange( { editor }: ChangeEvent ) {
         this.editorData = editor.getData();
-        // console.log(this.editorData );
     }
 
-  createArticle(title: string, content: string) {
+  createArticle(title: string, content: string, bio: string) {
     this.submitted = true;
 
     if (this.selectedPhoto == null) {
@@ -78,9 +78,9 @@ export class BackendComponent implements OnInit {
     if (this.articleForm.invalid) {
       return;
     }
-    const path1 = this.selectedPhoto;
-    const path2 = this.authorPhoto;
-    this.crud.addArticle(title, content, path1, path2, this.editorData);
+    const path = this.selectedPhoto;
+    const path1 = this.authorPhoto;
+    this.crud.addArticle(title, content, path, path1, this.editorData, bio);
     this.articleForm.reset();
     this.submitted = false;
   }

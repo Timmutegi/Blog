@@ -65,6 +65,12 @@
                 <div *ngIf="submitted && f.editor.errors" class="invalid-feedback ">
                     <div *ngIf="f.editor.errors.required ">Editor is required</div>
                 </div>
+                <div class="form-group bio">
+                    <textarea class="form-control" spellcheck="true" #bio formControlName="bio" placeholder="Author's Bio" [ngClass]="{ 'is-invalid': submitted && f.bio.errors}"></textarea>
+                    <div *ngIf="submitted && f.bio.errors" class="invalid-feedback ">
+                        <div *ngIf="f.bio.errors.required">Author's bio is required</div>
+                    </div>
+                </div>
             </form>
             <p>
                 <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -89,7 +95,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success sm" (click)="createArticle(title.value, summary.value)">Publish</button>
+            <button type="submit" class="btn btn-success sm" (click)="createArticle(title.value, summary.value, bio.value)">Publish</button>
         </div>
     </div>
 </div>
+<app-backend-footer></app-backend-footer>
