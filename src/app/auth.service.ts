@@ -20,12 +20,15 @@ export class AuthService {
             sessionStorage.setItem('user', 'ok');
             this.router.navigate(['/backend']);
           },
-          err => reject(err)
+          err => {
+            reject(err);
+            alert(err);
+          }
         );
     });
   }
 
-    async logout() {
+  async logout() {
     await this.angularFireAuth.auth.signOut();
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('articleID');
